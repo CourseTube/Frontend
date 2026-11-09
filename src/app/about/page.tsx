@@ -1,0 +1,11 @@
+import Link from "next/link";
+
+const principles = [
+  { index: "01", title: "Знання від практиків", text: "Наші автори — люди, які щодня працюють у своїй сфері та діляться перевіреним досвідом." },
+  { index: "02", title: "Навчайся у своєму темпі", text: "Разова оплата дає безстроковий доступ. Повертайся до уроків, коли це зручно саме тобі." },
+  { index: "03", title: "Простір для авторів", text: "Запускай курс без розробки власного сайту. Зосередься на контенті та своїх студентах." },
+];
+
+export default function AboutPage() {
+  return <main className="about-page"><section className="about-hero"><span className="section-kicker">ПРО COURSETUBE</span><h1>Зробили навчання<br />ближчим до <span>реальності.</span></h1><p>CourseTube — це місце, де практичні знання зустрічаються з людьми, готовими рухатися вперед.</p><span className="about-stamp">LEARN<br />TOGETHER<br />✳ GROW</span></section><section className="about-story"><div><span className="section-kicker">НАША ІДЕЯ</span><h2>Не ще одна бібліотека відео. А стартова точка.</h2></div><div><p>Ми віримо, що якісне навчання не має бути складним для пошуку або запуску. Тому зібрали незалежних експертів, практичні курси та інструменти, які допомагають перетворити цікавість на справжню навичку.</p><p>Усе просто: обирай курс, вчися у власному темпі, перевіряй знання та застосовуй їх у житті. Автори можуть зосередитися на своєму досвіді — про платформу для навчання подбаємо ми.</p><Link className="text-link" href="/courses">Знайти перший курс <span>↗</span></Link></div></section><section className="principles-section"><div className="section-heading"><div><span className="section-kicker">НАВЧАННЯ ЗІ ЗМІСТОМ</span><h2>Менше бар&apos;єрів.<br />Більше можливостей.</h2></div></div><div className="principle-grid">{principles.map((item) => <article className="principle-card" key={item.index}><span>{item.index} /</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></section><section className="creator-cta"><div><span className="section-kicker">МАЄШ ЧИМ ПОДІЛИТИСЬ?</span><h2>Твій досвід —<br />чиєсь нове вміння.</h2></div><Link href="/author/create-course" className="button button-lime">Створити курс <span>↗</span></Link></section></main>;
+}
