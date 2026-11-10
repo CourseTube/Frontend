@@ -1,0 +1,27 @@
+name: Main accepts PRs only from dev
+
+# pull_request_target: the workflow definition is taken from the base branch (main),
+# so a PR cannot edit it to pass. It never checks out PR code.
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, synchronize, edited]
+
+permissions: {}
+
+jobs:
+  check-source:
+    name: Source must be dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require head branch == dev in this repo
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REPO: ${{ github.repository }}
+        run: |
+          if [ "$HEAD_REF" != "dev" ] || [ "$HEAD_REPO" != "$BASE_REPO" ]; then
+            echo "::error::PRs into main are only allowed from the dev branch of $BASE_REPO (got $HEAD_REPO:$HEAD_REF)."
+            exit 1
+          fi
+          echo "OK: $HEAD_REPO:$HEAD_REF -> main"
